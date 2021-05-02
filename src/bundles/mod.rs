@@ -1,12 +1,11 @@
-use crate::components::*;
+use crate::components;
+use crate::components::{Actor, ActorType, MovementIntent, SpriteAdd, Velocity};
 use bevy::prelude::*;
 
 #[derive(Bundle)]
 pub struct Bullet {
     pub velocity: Velocity,
     pub sprite_add: SpriteAdd,
-    //#[bundle]
-    //sprite: SpriteBundle,
 }
 
 impl Default for Bullet {
@@ -14,6 +13,52 @@ impl Default for Bullet {
         Self {
             velocity: Velocity(Vec2::new(0.0, 0.0)),
             sprite_add: SpriteAdd("bullet.png"),
+        }
+    }
+}
+
+#[derive(Bundle)]
+pub struct Player {
+    pub player: components::Player,
+    pub velocity: Velocity,
+    pub movement_intent: MovementIntent,
+    pub transform: Transform,
+    pub sprite_add: SpriteAdd,
+    pub name: components::Name,
+}
+
+impl Default for Player {
+    fn default() -> Self {
+        Self {
+            player: components::Player::default(),
+            velocity: Velocity::default(),
+            movement_intent: MovementIntent::default(),
+            sprite_add: SpriteAdd("player.png"),
+            transform: Transform::default(),
+            name: components::Name("Mook"),
+        }
+    }
+}
+
+#[derive(Bundle)]
+pub struct BasicEnemy {
+    pub velocity: Velocity,
+    pub movement_intent: MovementIntent,
+    pub sprite_add: SpriteAdd,
+    pub transform: Transform,
+    pub name: components::Name,
+    pub actor: Actor,
+}
+
+impl Default for BasicEnemy {
+    fn default() -> Self {
+        Self {
+            velocity: Velocity::default(),
+            transform: Transform::default(),
+            movement_intent: MovementIntent::default(),
+            sprite_add: SpriteAdd("enemy.png"),
+            name: components::Name("Lurcher"),
+            actor: Actor(ActorType::BasicAi),
         }
     }
 }

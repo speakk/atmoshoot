@@ -1,8 +1,7 @@
 use bevy::prelude::*;
-use rand::Rng;
 
 mod components;
-use components::{MainCamera, MovementIntent, Name, Player, Velocity};
+use components::MainCamera;
 
 mod systems;
 use systems::*;
@@ -27,6 +26,7 @@ impl Plugin for GamePlugin {
                 .label("player_movement")
                 .after("input"),
         );
+        app.add_system(actor_system.system());
         app.add_system(
             movement_intent_system
                 .system()
@@ -51,31 +51,9 @@ fn setup(mut commands: Commands) {
         .insert(MainCamera);
 }
 
-fn add_people(
-    mut commands: Commands,
-    asset_server: Res<AssetServer>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
-) {
-    let mut rng = rand::thread_rng();
-
-    for _ in 1..2 {
-        let texture_handle = asset_server.load("textures/player.png");
-        commands
-            .spawn()
-            .insert(Player)
-            .insert(Velocity::default())
-            .insert(MovementIntent::default())
-            .insert_bundle(SpriteBundle {
-                material: materials.add(texture_handle.into()),
-                transform: Transform::from_xyz(
-                    rng.gen::<f32>() * 10.0,
-                    rng.gen::<f32>() * 10.0,
-                    rng.gen::<f32>() * 10.0,
-                ),
-                ..Default::default()
-            })
-            .insert(Name("spok".to_string()));
-    }
+fn add_people(mut commands: Commands) {
+    commands.spawn_bundle(bundles::Player::default());
+    commands.spawn_bundle(bundles::BasicEnemy::default());
 }
 
 fn main() {
