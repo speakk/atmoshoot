@@ -7,6 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-# bevy = "0.5"
-bevy = { path = "/home/speak/git/bevy" }
+bevy = "0.5"
 rand = "0.8.3"
+rust-fsm = "0.5.0"
+rust-fsm-dsl = "0.5.0"

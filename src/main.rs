@@ -10,6 +10,7 @@ mod events;
 use events::*;
 
 mod bundles;
+mod state_machines;
 
 pub struct GamePlugin;
 
@@ -27,6 +28,7 @@ impl Plugin for GamePlugin {
                 .after("input"),
         );
         app.add_system(actor_system.system());
+        app.add_system(actor_added_system.system());
         app.add_system(
             movement_intent_system
                 .system()

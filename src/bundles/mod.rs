@@ -1,6 +1,8 @@
 use crate::components;
 use crate::components::{Actor, ActorType, MovementIntent, SpriteAdd, Velocity};
+use crate::state_machines::basic_ai;
 use bevy::prelude::*;
+use rust_fsm::*;
 
 #[derive(Bundle)]
 pub struct Bullet {
@@ -58,7 +60,10 @@ impl Default for BasicEnemy {
             movement_intent: MovementIntent::default(),
             sprite_add: SpriteAdd("enemy.png"),
             name: components::Name("Lurcher"),
-            actor: Actor(ActorType::BasicAi),
+            actor: Actor {
+                actor_type: ActorType::BasicAi,
+                current_machine: None::<StateMachine<basic_ai::BasicAi>>,
+            },
         }
     }
 }
