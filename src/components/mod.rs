@@ -1,4 +1,6 @@
+use crate::state_machines::basic_ai;
 use bevy::prelude::Vec2;
+use rust_fsm::*;
 
 #[derive(Default)]
 pub struct Player;
@@ -24,4 +26,7 @@ pub enum ActorType {
     BasicAi,
 }
 
-pub struct Actor(pub ActorType);
+pub struct Actor {
+    pub actor_type: ActorType,
+    pub current_machine: Option<StateMachine<basic_ai::BasicAi>>,
+}
