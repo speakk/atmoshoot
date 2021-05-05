@@ -17,3 +17,8 @@ pub struct PlayerAttackEvent {
     pub click_position: Vec2,
     pub window_id: WindowId,
 }
+
+pub struct EntityNoticed {
+    pub noticed_entity: Entity,
+    pub observer_entity: Entity,
+}

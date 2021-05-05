@@ -12,12 +12,31 @@ use events::*;
 mod bundles;
 mod state_machines;
 
+use broccoli::{container::*, node::BBox};
+
+use state_machines::basic_ai::basic_ai_system;
+
 pub struct GamePlugin;
+
+pub struct SpatialTree {
+    tree: TreeOwned<BBox<f32, u32>>,
+}
+
+impl Default for SpatialTree {
+    fn default() -> Self {
+        let a = vec![].into_boxed_slice();
+        Self {
+            tree: TreeOwned::new(a),
+        }
+    }
+}
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut AppBuilder) {
         app.add_startup_system(setup.system());
         app.add_startup_system(add_people.system());
+        app.init_resource::<SpatialTree>();
+        app.add_event::<EntityNoticed>();
         app.add_event::<PlayerMoveEvent>();
         app.add_event::<PlayerAttackEvent>();
         app.add_system(input_system.system().label("input"));
@@ -29,6 +48,7 @@ impl Plugin for GamePlugin {
         );
         app.add_system(actor_system.system());
         app.add_system(actor_added_system.system());
+        app.add_system(basic_ai_system.system());
         app.add_system(
             movement_intent_system
                 .system()
@@ -42,6 +62,13 @@ impl Plugin for GamePlugin {
                 .after("movement_intent"),
         );
         app.add_system(clear_velocity_system.system().after("movement_system"));
+        app.add_system(
+            spatial_system
+                .system()
+                .label("spatial")
+                .after("movement_system"),
+        );
+        app.add_system(observer_system.system());
         app.add_system(player_attack_system.system());
         app.add_system(sprite_add_system.system());
     }

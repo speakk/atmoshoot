@@ -22,6 +22,12 @@ pub struct ClearVelocity;
 #[derive(Default)]
 pub struct MainCamera;
 
+#[derive(Default)]
+pub struct Spatial {
+    pub w: f32,
+    pub h: f32,
+}
+
 pub enum ActorType {
     BasicAi,
 }
@@ -29,4 +35,8 @@ pub enum ActorType {
 pub struct Actor {
     pub actor_type: ActorType,
     pub current_machine: Option<StateMachine<basic_ai::BasicAi>>,
+}
+
+pub struct Observer {
+    pub range: f32,
 }
