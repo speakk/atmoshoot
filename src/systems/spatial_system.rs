@@ -9,7 +9,7 @@ pub fn spatial_system(
     query: Query<(Entity, &Spatial, &Transform)>,
     mut spatial_tree: ResMut<SpatialTree>,
 ) {
-    let whoa: Vec<BBox<f32, u32>> = query
+    let spatial_entities: Vec<BBox<f32, u32>> = query
         .iter()
         .map(|(entity, spatial, transform)| {
             let translation = transform.translation;
@@ -23,5 +23,5 @@ pub fn spatial_system(
         })
         .collect();
 
-    spatial_tree.tree = TreeOwned::new(whoa.into_boxed_slice());
+    spatial_tree.tree = TreeOwned::new(spatial_entities.into_boxed_slice());
 }
