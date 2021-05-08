@@ -9,7 +9,7 @@ pub fn spatial_system(
     query: Query<(Entity, &Spatial, &Transform)>,
     mut spatial_tree: ResMut<SpatialTree>,
 ) {
-    let spatial_entities: Vec<BBox<f32, u32>> = query
+    let spatial_entities: Vec<BBox<f32, Entity>> = query
         .iter()
         .map(|(entity, spatial, transform)| {
             let translation = transform.translation;
@@ -19,7 +19,7 @@ pub fn spatial_system(
                 translation.y,
                 translation.y + spatial.h,
             );
-            bbox(new_rect, entity.id())
+            bbox(new_rect, entity)
         })
         .collect();
 

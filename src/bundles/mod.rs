@@ -7,6 +7,7 @@ use rust_fsm::*;
 #[derive(Bundle)]
 pub struct Bullet {
     pub velocity: Velocity,
+    pub spatial: Spatial,
     pub sprite_add: SpriteAdd,
 }
 
@@ -14,6 +15,7 @@ impl Default for Bullet {
     fn default() -> Self {
         Self {
             velocity: Velocity(Vec2::new(0.0, 0.0)),
+            spatial: Spatial { w: 5.0, h: 5.0 },
             sprite_add: SpriteAdd("bullet.png"),
         }
     }

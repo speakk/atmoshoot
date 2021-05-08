@@ -19,7 +19,7 @@ use state_machines::basic_ai::basic_ai_system;
 pub struct GamePlugin;
 
 pub struct SpatialTree {
-    tree: TreeOwned<BBox<f32, u32>>,
+    tree: TreeOwned<BBox<f32, Entity>>,
 }
 
 impl Default for SpatialTree {
