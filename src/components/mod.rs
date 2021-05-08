@@ -1,5 +1,5 @@
 use crate::state_machines::basic_ai;
-use bevy::prelude::Vec2;
+use bevy::prelude::{Entity, Vec2};
 use rust_fsm::*;
 
 #[derive(Default)]
