@@ -1,5 +1,6 @@
-mod actor_system;
+mod basic_ai;
 mod clear_velocity_system;
+mod follow_entity_system;
 mod input_system;
 mod movement_intent_system;
 mod movement_system;
@@ -9,8 +10,9 @@ mod player_movement_system;
 mod spatial_system;
 mod sprite_add_system;
 
-pub use actor_system::*;
+pub use basic_ai::*;
 pub use clear_velocity_system::clear_velocity_system;
+pub use follow_entity_system::follow_entity_system;
 pub use input_system::input_system;
 pub use movement_intent_system::movement_intent_system;
 pub use movement_system::movement_system;

@@ -10,11 +10,8 @@ mod events;
 use events::*;
 
 mod bundles;
-mod state_machines;
 
 use broccoli::{container::*, node::BBox};
-
-use state_machines::basic_ai::basic_ai_system;
 
 pub struct GamePlugin;
 
@@ -46,9 +43,6 @@ impl Plugin for GamePlugin {
                 .label("player_movement")
                 .after("input"),
         );
-        app.add_system(actor_system.system());
-        app.add_system(actor_added_system.system());
-        app.add_system(basic_ai_system.system());
         app.add_system(
             movement_intent_system
                 .system()
@@ -69,8 +63,10 @@ impl Plugin for GamePlugin {
                 .after("movement_system"),
         );
         app.add_system(observer_system.system());
+        app.add_system(follow_entity_system.system());
         app.add_system(player_attack_system.system());
         app.add_system(sprite_add_system.system());
+        app.add_system(basic_ai_notice_entity.system());
     }
 }
 

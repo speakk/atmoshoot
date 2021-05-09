@@ -1,6 +1,4 @@
-use crate::state_machines::basic_ai;
 use bevy::prelude::{Entity, Vec2};
-use rust_fsm::*;
 
 #[derive(Default)]
 pub struct Player;
@@ -28,15 +26,14 @@ pub struct Spatial {
     pub h: f32,
 }
 
-pub enum ActorType {
-    BasicAi,
-}
-
-pub struct Actor {
-    pub actor_type: ActorType,
-    pub current_machine: Option<StateMachine<basic_ai::BasicAi>>,
-}
-
+#[derive(Default)]
 pub struct Observer {
     pub range: f32,
 }
+
+pub struct FollowEntity {
+    pub target: Entity,
+}
+
+#[derive(Default)]
+pub struct BasicAi;
