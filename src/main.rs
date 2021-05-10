@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 mod components;
-use components::MainCamera;
+use components::{MainCamera, Player};
 
 mod systems;
 use systems::*;
@@ -62,11 +62,11 @@ impl Plugin for GamePlugin {
                 .label("spatial")
                 .after("movement_system"),
         );
-        app.add_system(observer_system.system());
+        app.add_system(observer_system::<Player>.system());
         app.add_system(follow_entity_system.system());
         app.add_system(player_attack_system.system());
         app.add_system(sprite_add_system.system());
-        app.add_system(basic_ai_notice_entity.system());
+        app.add_system(basic_ai_notice_entity::<Player>.system());
     }
 }
 

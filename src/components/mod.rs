@@ -27,8 +27,10 @@ pub struct Spatial {
 }
 
 #[derive(Default)]
-pub struct Observer {
+pub struct Observer<T: bevy::ecs::component::Component> {
     pub range: f32,
+    pub found_entity: Option<Entity>,
+    pub phantom: std::marker::PhantomData<T>,
 }
 
 pub struct FollowEntity {

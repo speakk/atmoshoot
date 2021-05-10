@@ -50,7 +50,7 @@ pub struct BasicEnemy {
     pub movement_intent: MovementIntent,
     pub sprite_add: SpriteAdd,
     pub transform: Transform,
-    pub observer: Observer,
+    pub observer: Observer<components::Player>,
     pub name: components::Name,
     pub basic_ai: BasicAi,
 }
@@ -60,7 +60,11 @@ impl Default for BasicEnemy {
         Self {
             velocity: Velocity::default(),
             transform: Transform::default(),
-            observer: Observer { range: 300.0 },
+            observer: Observer::<components::Player> {
+                range: 300.0,
+                found_entity: None,
+                phantom: std::marker::PhantomData,
+            },
             movement_intent: MovementIntent::default(),
             sprite_add: SpriteAdd("enemy.png"),
             name: components::Name("Lurcher"),
