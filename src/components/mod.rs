@@ -1,4 +1,4 @@
-use bevy::prelude::{Entity, Vec2};
+use bevy::prelude::{Entity, Timer, Vec2};
 
 #[derive(Default)]
 pub struct Player;
@@ -39,3 +39,8 @@ pub struct FollowEntity {
 
 #[derive(Default)]
 pub struct BasicAi;
+
+#[derive(Default)]
+pub struct SelfDestruct {
+    pub timer: Timer,
+}

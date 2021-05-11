@@ -64,6 +64,7 @@ impl Plugin for GamePlugin {
         );
         app.add_system(observer_system::<Player>.system());
         app.add_system(follow_entity_system.system());
+        app.add_system(self_destruct.system());
         app.add_system(player_attack_system.system());
         app.add_system(sprite_add_system.system());
         app.add_system(basic_ai_notice_entity::<Player>.system());

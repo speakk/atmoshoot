@@ -7,6 +7,7 @@ mod movement_system;
 mod observer_system;
 mod player_attack_system;
 mod player_movement_system;
+mod self_destruct;
 mod spatial_system;
 mod sprite_add_system;
 
@@ -19,5 +20,6 @@ pub use movement_system::movement_system;
 pub use observer_system::observer_system;
 pub use player_attack_system::player_attack_system;
 pub use player_movement_system::player_movement_system;
+pub use self_destruct::self_destruct;
 pub use spatial_system::spatial_system;
 pub use sprite_add_system::sprite_add_system;

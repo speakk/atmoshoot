@@ -1,5 +1,7 @@
 use crate::components;
-use crate::components::{BasicAi, MovementIntent, Observer, Spatial, SpriteAdd, Velocity};
+use crate::components::{
+    BasicAi, MovementIntent, Observer, SelfDestruct, Spatial, SpriteAdd, Velocity,
+};
 use bevy::prelude::*;
 
 #[derive(Bundle)]
@@ -7,6 +9,7 @@ pub struct Bullet {
     pub velocity: Velocity,
     pub spatial: Spatial,
     pub sprite_add: SpriteAdd,
+    pub self_destruct: SelfDestruct,
 }
 
 impl Default for Bullet {
@@ -15,6 +18,9 @@ impl Default for Bullet {
             velocity: Velocity(Vec2::new(0.0, 0.0)),
             spatial: Spatial { w: 5.0, h: 5.0 },
             sprite_add: SpriteAdd("bullet.png"),
+            self_destruct: SelfDestruct {
+                timer: Timer::from_seconds(1.3, false),
+            },
         }
     }
 }
