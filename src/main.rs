@@ -62,6 +62,7 @@ impl Plugin for GamePlugin {
                 .label("spatial")
                 .after("movement_system"),
         );
+        app.add_system(collision_system.system().after("spatial"));
         app.add_system(observer_system::<Player>.system());
         app.add_system(follow_entity_system.system());
         app.add_system(self_destruct.system());

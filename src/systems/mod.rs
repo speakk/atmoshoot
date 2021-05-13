@@ -1,5 +1,6 @@
 mod basic_ai;
 mod clear_velocity_system;
+mod collision_system;
 mod follow_entity_system;
 mod input_system;
 mod movement_intent_system;
@@ -13,6 +14,7 @@ mod sprite_add_system;
 
 pub use basic_ai::*;
 pub use clear_velocity_system::clear_velocity_system;
+pub use collision_system::collision_system;
 pub use follow_entity_system::follow_entity_system;
 pub use input_system::input_system;
 pub use movement_intent_system::movement_intent_system;
